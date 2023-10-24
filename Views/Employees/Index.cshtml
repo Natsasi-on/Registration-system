@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Lab6.Models.DataAccess.Employee>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Employee Name
+            </th>
+            <th>
+                Network ID
+            </th>
+            <th>
+               Job Titile(s)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                   @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @{
+                        List<string> myroles = new List<string>();
+                        for (int i = 0; i < item.Roles.Count; i++)
+                        {
+                            var text = "";
+                            foreach (var ab in item.Roles)
+                            {
+                                if (ab.Id == 1)
+                                {
+                                    text = "Department Chair";
+                                    myroles.Add(text);
+
+                                }
+                                else if (ab.Id == 2)
+                                {
+                                    text = " Coordinator";
+                                    myroles.Add(text);
+
+                                }
+                                else if (ab.Id == 3)
+                                {
+                                    text = " Instructor";
+                                    myroles.Add(text);
+
+                                }
+                            }
+                            break;
+                        }
+                    }                        
+                    @if(myroles.Count() > 1){
+                        var mya = "";
+                        foreach (var emRole in myroles)
+                        {
+                            mya += emRole + ","; 
+
+                        }
+                        mya = mya.TrimEnd(',');
+                        @mya
+                    }
+                    else
+                    {
+                        foreach (var emRole in myroles)
+                        {
+                            @emRole
+                        }
+                    }
+                   
+                       
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                </td>
+            </tr>
+        }
+                </tbody>
+            </table>

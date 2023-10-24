@@ -9,7 +9,7 @@
 
 This website leverages several key technologies and techniques to provide a smooth user experience:
 
-* **APS.net core MVC**
+* **APS.NET core MVC**
 
 * **SQL database**
 
